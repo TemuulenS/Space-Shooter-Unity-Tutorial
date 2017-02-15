@@ -25,19 +25,24 @@ public class PlayerController : MonoBehaviour {
 			// GameObject clone =
 		}
 	}
-	void FixedUpdate() 
+
+
+	void FixedUpdate ()
 	{
+		Rigidbody rigidBody = GetComponent<Rigidbody>();
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		Rigidbody rigidBody = GetComponent<Rigidbody>();
+
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 		rigidBody.velocity = movement * speed;
-		rigidBody.position = new Vector3 (
-			Mathf.Clamp(rigidBody.position.x, boundary.xMin, boundary.xMax), 
-			0.0f, 
-			Mathf.Clamp(rigidBody.position.z, boundary.zMin, boundary.zMax)
-		);
-		rigidBody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidBody.velocity.x * -tilt);
 
+		rigidBody.position = new Vector3 
+			(
+				Mathf.Clamp (rigidBody	.position.x, boundary.xMin, boundary.xMax), 
+				0.0f, 
+				Mathf.Clamp (rigidBody.position.z, boundary.zMin, boundary.zMax)
+			);
+
+		rigidBody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidBody.velocity.x * -tilt);
 	}
 }
